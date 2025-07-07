@@ -1,13 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import CatCheckboxWithSubmitButton from "./catCheckboxWithSubmitButton";
-
-async function handleSubmitForm(formData: FormData) {
-  "use server";
-  console.log("Form submitted");
-  console.log(formData.get("name"));
-  console.log(formData.get("image"));
-}
+import { handleSubmitForm } from "../actions";
 
 export default function SubmitForm() {
   return (
