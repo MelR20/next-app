@@ -18,8 +18,8 @@ export default function SubmitForm() {
           />
         </Label>
         <Label id="imageLabel" className="mr-4 pb-4 mb-4">
-          Upload photo
-          <Input name="image" type="file" className="flex-1/2" />
+          Picture URL
+          <Input name="image" type="string" className="flex-1/2" />
         </Label>
         <CatCheckboxWithSubmitButton />
       </form>
