@@ -1,7 +1,7 @@
 'use server';
 import { db } from '@/index';
 import { catsTable } from '../db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 
 export async function createCat(formData: FormData) {
@@ -38,6 +38,17 @@ export async function getCatById(id: number) {
         const cat = await db.select().from(catsTable).where(eq(catsTable.id, id));
     } catch (error) {
         console.error("Error fetching cat:", error);
+    }
+}
+
+// READ - Get random cat
+export async function getRandomCat() {
+    try {
+        const cats = await db.select().from(catsTable).orderBy(sql`RANDOM()`).limit(1);
+        return cats[0] || null;
+    } catch (error) {
+        console.error("Error fetching random cat:", error);
+        return null;
     }
 }
 
