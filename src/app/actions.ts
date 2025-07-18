@@ -8,12 +8,15 @@ export async function createCat(formData: FormData) {
     
     const name = formData.get("name") as string;
     const image = formData.get("image") as string;
-    
+    const color = formData.get("color") as string;
+    const hairLength = formData.get("hairLength") as string;
     try {
         // CREATE - Insert new cat
         const newCat = await db.insert(catsTable).values({
             name: name,
             image: image,
+            color: color,
+            hairLength: hairLength,
         }).returning();
         
         console.log("Cat added:", newCat[0]);

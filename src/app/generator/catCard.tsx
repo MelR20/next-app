@@ -1,7 +1,7 @@
 "use client";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Cat } from "./page";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { getRandomCat } from "../actions";
 
