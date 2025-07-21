@@ -1,13 +1,5 @@
-import { Card, CardAction, CardContent, CardTitle } from "@/components/ui/card";
 import { getRandomCat } from "../actions";
-import { Label } from "@/components/ui/label";
 import CatCard from "./catCard";
-
-export type Cat = {
-  id: number;
-  name: string;
-  image: string;
-};
 
 export default async function Generator() {
   const cat = await getRandomCat();

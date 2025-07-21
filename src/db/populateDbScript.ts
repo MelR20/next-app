@@ -1,5 +1,5 @@
 import { db } from "@/index";
-import { catsTable } from "./schema";
+import { catsTable } from "@/db/schema";
 import { faker } from "@faker-js/faker";
 
 function getCatName() {
