@@ -7,9 +7,9 @@ function getCatName() {
     return catName;
 }
 
-async function getCatImage(catColor:string, catHairLength:string) {
+async function getCatImage(catColor:string) {
     
-    const catJSON = await fetch(`https://cataas.com/cat/${catColor}?${catHairLength}?position=center&json=true&html=true`);
+    const catJSON = await fetch(`https://cataas.com/cat/${catColor}?position=center&json=true&html=true`);
     const catData = await catJSON.json();
     return catData.url;
 }
@@ -19,33 +19,29 @@ function getCreationDate() {
     return creationDate;
 }
 
-async function getCat(catColor:string, catHairLength:string) {
+async function getCat(catColor:string) {
     const catName = getCatName();
-    const image = await getCatImage(catColor, catHairLength);
+    const image = await getCatImage(catColor);
     const creationDate = getCreationDate();
-    const cat = await db.insert(catsTable).values({
-        name: catName,
-        image: image,
-        color: catColor,
-        hairLength: catHairLength,
-        createdAt: creationDate,
-    });
+    
+    if (image){
+        const cat = await db.insert(catsTable).values({
+            name: catName,
+            image: image,
+            color: catColor,
+            createdAt: creationDate,
+        });
+    }
 }
 
 const populateDbScript = async () => {
-    for (let i = 0; i < 10; i++) {
-        await getCat("orange", "shorthair");
-        await getCat("orange", "longhair");
-        await getCat("black", "shorthair");
-        await getCat("black", "longhair");
-        await getCat("white", "shorthair");
-        await getCat("white", "longhair");
-        await getCat("brown", "shorthair");
-        await getCat("brown", "longhair");
-        await getCat("gray", "shorthair");
-        await getCat("gray", "longhair");
-        await getCat("tabby", "shorthair");
-        await getCat("tabby", "longhair");
+    for (let i = 0; i < 25; i++) {
+        await getCat("orange");
+        await getCat("black");
+        await getCat("white" );
+        await getCat("brown");
+        await getCat("grey");
+        await getCat("tabby");
 
     }
 };

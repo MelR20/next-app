@@ -4,7 +4,6 @@ export type Cat = {
     name: string;
     image: string;
     color: string;
-    hairLength: string;
     createdAt: Date;
   };
   

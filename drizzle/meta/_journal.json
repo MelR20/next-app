@@ -15,6 +15,13 @@
       "when": 1752853052095,
       "tag": "0001_eminent_swordsman",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1753124273199,
+      "tag": "0002_stormy_magneto",
+      "breakpoints": true
     }
   ]
 }
