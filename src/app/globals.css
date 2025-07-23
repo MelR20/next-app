@@ -135,6 +135,19 @@
   @apply text-center text-2xl font-semibold pb-6;
 }
 
-.cardSmall {
 
+.cardSmall {
+  @apply max-w-[280px] w-full aspect-square p-2 flex flex-col mx-auto;
+}
+
+.cardTitleSmall {
+  @apply text-center w-full mb-2 text-base;
+}
+
+.cardContent {
+  @apply flex-1 w-full flex items-center justify-center overflow-hidden;
+}
+
+.cardList {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full;
 }

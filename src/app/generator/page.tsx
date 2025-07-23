@@ -1,5 +1,5 @@
 import { getRandomCat } from "../actions";
-import CatCard from "./catCard";
+import CatCard from "../../components/catCard";
 
 export default async function Generator() {
   const cat = await getRandomCat();

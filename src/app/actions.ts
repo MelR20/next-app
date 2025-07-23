@@ -16,7 +16,6 @@ export async function createCat(formData: FormData) {
             name: name,
             image: image,
             color: color,
-            hairLength: hairLength,
         }).returning();
         
         console.log("Cat added:", newCat[0]);

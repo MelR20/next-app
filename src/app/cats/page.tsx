@@ -7,10 +7,18 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import CardList from "@/components/cardList";
+import ReactQueryProvider from "../ReactQueryProvider";
 
-export default function Cats() {
+export default async function Cats() {
   return (
     <main className="main-container">
+      <h1 className="h1">All the Cuteness</h1>
+      <div className="cardList">
+        <ReactQueryProvider>
+          <CardList page={1} pageSize={10} />
+        </ReactQueryProvider>
+      </div>
       <Pagination>
         <PaginationContent>
           <PaginationItem>

@@ -15,6 +15,12 @@ export default function Home() {
           <Link href="/generator">Generate Cuteness</Link>
         </Button>
       </div>
+      <div className="flex-col space-x-4 pt-4">
+        <h2 className="h2">You can also</h2>
+        <Button asChild>
+          <Link href="/cats">See All the Cuteness</Link>
+        </Button>
+      </div>
     </main>
   );
 }
