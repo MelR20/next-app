@@ -5,7 +5,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { getRandomCat } from "../actions";
 
-export default function CatCard({ cat }: { cat: Cat }) {
+export default function CatCard({
+  cat,
+  size = "regular",
+}: {
+  cat: Cat;
+  size?: "regular" | "small";
+}) {
   const [CatGenerated, setCatGenerated] = useState<Cat>(cat);
 
   async function fetchCat() {
@@ -17,7 +23,6 @@ export default function CatCard({ cat }: { cat: Cat }) {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-14">Here's a cat for you</h1>
       <Card className="w-full max-w-xs sm:max-w-sm md:max-w-md aspect-square mx-auto p-4 flex flex-col items-center justify-center">
         <CardTitle className="text-center w-full mb-4 text-xl">
           This is {CatGenerated.name}

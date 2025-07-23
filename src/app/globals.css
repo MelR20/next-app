@@ -120,3 +120,21 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* custom styles for components */
+
+.main-container {
+  @apply flex flex-col items-center min-h-screen p-14;
+}
+
+.h1 {
+  @apply text-center text-4xl font-extrabold tracking-tight text-balance pb-12;
+}
+
+.h2 {
+  @apply text-center text-2xl font-semibold pb-6;
+}
+
+.cardSmall {
+
+}
