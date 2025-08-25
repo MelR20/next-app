@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   const total = (await db.select({ count: count() }).from(catsTable))[0].count;
   const totalPages = getTotalPages(total, pageSize);
 
-
+  
   const cats = await db
     .select()
     .from(catsTable)
@@ -25,4 +25,3 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json<Paginated<Cat>>({ data: cats, total: total, page: page, limit: pageSize, totalPages: totalPages });
 }
-//returns Response<Paginated<Cat>>

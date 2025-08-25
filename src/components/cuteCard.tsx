@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { getRandomCat } from "../app/actions";
 
-export default function CatCard({
+export default function CuteCard({
   cat,
   size = "regular",
 }: {
