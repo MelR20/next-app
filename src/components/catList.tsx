@@ -27,6 +27,30 @@ export default function CatList() {
     queryFn: () => getCats(page, pageSize),
   });
 
+  const pageTotal = data?.totalPages || 0;
+
+  function changePage(isNext: boolean) {
+    if (!isNext) {
+      if (page != 1) setPage(page - 1);
+    }
+    if (isNext) {
+      if (page != pageTotal) {
+        setPage(page + 1);
+      }
+    }
+  }
+
+  function getPageNumbers(currentPage: number, totalPages: number) {
+    if (totalPages < 5) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    } else {
+      //todo: A modifier pour plusieurs pages
+      return [1, 2, 3, "...", totalPages];
+    }
+  }
+
+  const pageNumbers = getPageNumbers(page, pageTotal);
+
   return (
     <>
       <div className="cardList">
@@ -35,16 +59,37 @@ export default function CatList() {
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious href="#" />
+            <PaginationPrevious
+              href="#"
+              onClick={() => {
+                changePage(false);
+              }}
+            />
           </PaginationItem>
+
+          {pageNumbers.map((pageNum, index) => {
+            if (pageNum === "...") {
+              return (
+                <PaginationItem key={index}>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              );
+            }
+            return (
+              <PaginationItem key={index}>
+                <PaginationLink
+                  href="#"
+                  isActive={page === pageNum}
+                  onClick={() => setPage(Number(pageNum))}
+                >
+                  {pageNum}
+                </PaginationLink>
+              </PaginationItem>
+            );
+          })}
+
           <PaginationItem>
-            <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
+            <PaginationNext href="#" onClick={() => changePage(true)} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
