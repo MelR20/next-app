@@ -1,9 +1,14 @@
 "use client";
 
 import CardList from "@/components/cardList";
-import { useQuery } from "@tanstack/react-query";
+import {
+  usePrefetchQuery,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ListPagination from "./listPagination";
+import { Button } from "./ui/button";
 
 function getCats(page: number, pageSize: number) {
   return fetch(`/api/cats?page=${page}&pageSize=${pageSize}`).then((res) =>
@@ -13,11 +18,9 @@ function getCats(page: number, pageSize: number) {
 
 export default function CatList() {
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
 
   const page = parseInt(searchParams.get("page") || "1");
-  const pageSize = parseInt(searchParams.get("pageSize") || "10");
+  const pageSize = parseInt(searchParams.get("pageSize") || "8");
 
   const { data, isLoading } = useQuery({
     queryKey: ["cats", page, pageSize],

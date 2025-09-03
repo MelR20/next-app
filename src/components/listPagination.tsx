@@ -8,6 +8,16 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 export default function ListPagination({
   page,
@@ -22,11 +32,11 @@ export default function ListPagination({
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  function getPagePath(newPage: number) {
+  function getPagePath(newPage: number, newPageSize: number) {
     const params = new URLSearchParams(searchParams);
     const pageNum = newPage > 0 ? Math.min(totalPages, newPage) : 1;
     params.set("page", pageNum.toString());
-    params.set("pageSize", pageSize.toString());
+    params.set("pageSize", newPageSize.toString());
 
     return `${pathname}?${params.toString()}`;
   }
@@ -64,42 +74,85 @@ export default function ListPagination({
   }
 
   return (
-    <Pagination className="mt-8">
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious
-            href={getPagePath(page - 1)}
-            isActive={page === 1}
-          />
-        </PaginationItem>
+    <div className="flex flex-row mt-8">
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              href={getPagePath(page - 1, pageSize)}
+              isActive={page === 1}
+            />
+          </PaginationItem>
 
-        {pageNumbers.map((pageNum, index) => {
-          if (pageNum === "...") {
+          {pageNumbers.map((pageNum, index) => {
+            if (pageNum === "...") {
+              return (
+                <PaginationItem key={index}>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              );
+            }
             return (
               <PaginationItem key={index}>
-                <PaginationEllipsis />
+                <PaginationLink
+                  href={getPagePath(Number(pageNum), pageSize)}
+                  isActive={page === pageNum}
+                >
+                  {pageNum}
+                </PaginationLink>
               </PaginationItem>
             );
-          }
-          return (
-            <PaginationItem key={index}>
-              <PaginationLink
-                href={getPagePath(Number(pageNum))}
-                isActive={page === pageNum}
-              >
-                {pageNum}
-              </PaginationLink>
-            </PaginationItem>
-          );
-        })}
+          })}
 
-        <PaginationItem>
-          <PaginationNext
-            href={getPagePath(Number(page + 1))}
-            isActive={page !== totalPages}
-          />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+          <PaginationItem>
+            <PaginationNext
+              href={getPagePath(Number(page + 1), pageSize)}
+              isActive={page !== totalPages}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+      <div className="ml-8">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button asChild variant="outline">
+              <div>
+                {pageSize}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>Show items</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href={getPagePath(1, 8)}>8</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={getPagePath(1, 12)}>12</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={getPagePath(1, 24)}>24</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={getPagePath(1, 48)}>48</Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </div>
   );
 }
