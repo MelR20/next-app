@@ -6,8 +6,6 @@ import { getTotalPages, getOffset, Paginated } from "@/types/Paginated";
 import { Cat } from "@/types/Cat";
 
 export async function GET(request: NextRequest) {
-
-
   const { searchParams } = new URL(request.url);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
   const page = parseInt(searchParams.get("page") || "1");

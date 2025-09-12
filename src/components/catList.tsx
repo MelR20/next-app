@@ -9,6 +9,7 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ListPagination from "./listPagination";
 import { Button } from "./ui/button";
+import CatColorFilter from "./catColorFilter";
 
 function getCats(page: number, pageSize: number) {
   return fetch(`/api/cats?page=${page}&pageSize=${pageSize}`).then((res) =>
@@ -31,6 +32,10 @@ export default function CatList() {
 
   return (
     <>
+      <CatColorFilter
+        pageSize={pageSize}
+        totalPages={totalPages}
+      ></CatColorFilter>
       <div className="cardList">
         <CardList cats={data?.data} />
       </div>
