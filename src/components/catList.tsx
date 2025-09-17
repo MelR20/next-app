@@ -60,11 +60,13 @@ export default function CatList() {
 
   return (
     <>
-      <CatColorFilter
-        pageSize={pageSize}
-        totalPages={totalPages}
-        getPagePath={getPagePath}
-      />
+      <div className="mb-4 ">
+        <CatColorFilter
+          pageSize={pageSize}
+          totalPages={totalPages}
+          getPagePath={getPagePath}
+        />
+      </div>
       <div className="cardList">
         <CardList cats={data?.data} />
       </div>
